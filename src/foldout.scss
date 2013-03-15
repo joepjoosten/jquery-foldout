@@ -5,7 +5,7 @@
   position: relative;
 
   @include box-sizing(border-box);
-  @include perspective(1000px);
+  @include perspective(2000px);
 
   $i: 11;
   @while $i > 1 {
@@ -44,7 +44,7 @@
   }
 
   &[data-folded="true"]:hover .slice:not(:first-child) {
-    @include transform(translate3d(100%, 0, 0) rotate3d(0,1,0,0deg));
+    @include transform(translate3d(100%, 0, 0) rotateY(0deg));
   }
 
   .overlay {
@@ -58,17 +58,17 @@
   @while $i > 0 {
     &:hover .slice-#{$i} {
       @if ($i % 2) == 1 {
-        @include transform(translate3d(100%, 0, 0) rotate3d(0,1,0,-180deg));
+        @include transform(translate3d(100%, 0, 0) rotateY(-180deg));
       } @else {
-        @include transform(translate3d(100%, 0, 0) rotate3d(0,1,0,180deg));
+        @include transform(translate3d(100%, 0, 0) rotateY(180deg));
       }
     }
 
     &[data-folded="true"] .slice-#{$i} {
       @if ($i % 2) == 1 {
-        @include transform(translate3d(100%, 0, 0) rotate3d(0,1,0,-180deg));
+        @include transform(translate3d(100%, 0, 0) rotateY(-180deg));
       } @else {
-        @include transform(translate3d(100%, 0, 0) rotate3d(0,1,0,180deg));
+        @include transform(translate3d(100%, 0, 0) rotateY(180deg));
       }
     }
     $i: $i - 1;
