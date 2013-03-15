@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>jquery-foldout</groupId>
+    <artifactId>foldout</artifactId>
+    <packaging>pom</packaging>
+    <name>JQuery Foldout</name>
+    <version>0.1.0</version>
+    <description>Building jquery-foldout css</description>
+    <url></url>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jasig.maven</groupId>
+                <artifactId>sass-maven-plugin</artifactId>
+                <version>1.1.0</version>
+                <executions>
+                    <execution>
+                        <id>nested</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>update-stylesheets</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <source>
+                                        <directory>${basedir}/src</directory>
+                                        <includes>
+                                            <include>**</include>
+                                        </includes>
+                                    </source>
+                                    <destination>${basedir}/build</destination>
+                                </resource>
+                            </resources>
+                            <buildDirectory>${project.build.directory}</buildDirectory>
+                            <useCompass>true</useCompass>
+                            <sassOptions>
+                                <style>:nested</style>
+                            </sassOptions>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>compressed</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>update-stylesheets</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <source>
+                                        <directory>${basedir}/src</directory>
+                                        <includes>
+                                            <include>**</include>
+                                        </includes>
+                                    </source>
+                                    <destination>${basedir}/build/minified</destination>
+                                </resource>
+                            </resources>
+                            <buildDirectory>${project.build.directory}</buildDirectory>
+                            <useCompass>true</useCompass>
+                            <sassOptions>
+                                <style>:compressed</style>
+                            </sassOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

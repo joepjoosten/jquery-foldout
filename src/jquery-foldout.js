@@ -1,29 +1,25 @@
 ( function( $ ) {
 
-    $.fn.hoverfold = function( args ) {
+    $.fn.foldout = function( args ) {
 
         this.each( function() {
 
-            $( this ).children( '.view' ).each( function() {
+            var $item 	= $( this ),
+                img		= $item.children( 'img' ).attr( 'src' ),
+                folds = $item.data('folds'),
+                struct	= '';
 
-                var $item 	= $( this ),
-                    img		= $item.children( 'img' ).attr( 'src' ),
-                    struct	= '<div class="slice s1">';
-                struct	+='<div class="slice s2">';
-                struct	+='<div class="slice s3">';
-                struct	+='<div class="slice s4">';
-                struct	+='<div class="slice s5">';
-                struct	+='</div>';
-                struct	+='</div>';
-                struct	+='</div>';
-                struct	+='</div>';
-                struct	+='</div>';
+            for (var i=0; i<folds+1; i++) {
+                struct  +='<div class="slice slice-'+i+'">';
+            }
 
-                var $struct = $( struct );
+            for (i=0; i<folds+1; i++) {
+                struct	+='</div>';
+            }
 
-                $item.find( 'img' ).remove().end().append( $struct ).find( 'div.slice' ).css( 'background-image', 'url(' + img + ')' ).prepend( $( '<span class="overlay" ></span>' ) );
+            var $struct = $( struct );
 
-            } );
+            $item.addClass('slices').find( 'img' ).remove().end().append( $struct ).find( 'div.slice' ).css( 'background-image', 'url(' + img + ')' ).prepend( $( '<span class="overlay" ></span>' ) );
 
         });
 

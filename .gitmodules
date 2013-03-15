@@ -1,3 +1,0 @@
-[submodule "lib/compass"]
-	path = lib/compass
-	url = git://github.com/chriseppstein/compass.git

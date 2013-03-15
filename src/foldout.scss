@@ -1,0 +1,88 @@
+@import "compass/css3";
+@import "compass/css3/transform";
+
+.slices {
+  position: relative;
+
+  @include box-sizing(border-box);
+  @include perspective(1000px);
+
+  $i: 11;
+  @while $i > 1 {
+    &[data-folds="#{$i - 1}"] {
+      .slice {
+        background-size: 100%*$i 100%;
+      }
+
+      $j: $i;
+      @while $j > 0 {
+        .slice-#{$j} {
+          background-position: -100%*$j 0;
+        }
+
+        $j: $j - 1;
+      }
+
+      .slice:first-child {
+        width: 100%/$i !important;
+      }
+    }
+    $i: $i - 1;
+  }
+
+  .slice {
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    @include apply-origin(left center, true);
+    @include transform-style(preserve-3d);
+    @include transition(transform 1s ease-in-out);
+
+    &:not(:first-child) {
+      @include translate3d(100%, 0, 0);
+    }
+  }
+
+  &[data-start="folded"]:hover .slice:not(:first-child) {
+    @include transform(translate3d(100%, 0, 0) rotate3d(0,1,0,0deg));
+  }
+
+  .overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: block;
+  }
+
+  $i: 11;
+  @while $i > 0 {
+    &:hover .slice-#{$i} {
+      @if ($i % 2) == 1 {
+        @include transform(translate3d(100%, 0, 0) rotate3d(0,1,0,-180deg));
+      } @else {
+        @include transform(translate3d(100%, 0, 0) rotate3d(0,1,0,180deg));
+      }
+    }
+
+    &[data-start="folded"] .slice-#{$i} {
+      @if ($i % 2) == 1 {
+        @include transform(translate3d(100%, 0, 0) rotate3d(0,1,0,-180deg));
+      } @else {
+        @include transform(translate3d(100%, 0, 0) rotate3d(0,1,0,180deg));
+      }
+    }
+    $i: $i - 1;
+  }
+
+  $i: 11;
+  @while $i > -1 {
+    .slice-#{$i} > .overlay {
+      @if ($i % 2) == 1 {
+        @include background-image(linear-gradient(right, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0) 100%));
+      } @else {
+        @include background-image(linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 100%));
+      }
+    }
+    $i: $i - 1;
+  }
+}
