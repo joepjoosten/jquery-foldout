@@ -43,7 +43,7 @@
     }
   }
 
-  &[data-start="folded"]:hover .slice:not(:first-child) {
+  &[data-folded="true"]:hover .slice:not(:first-child) {
     @include transform(translate3d(100%, 0, 0) rotate3d(0,1,0,0deg));
   }
 
@@ -64,7 +64,7 @@
       }
     }
 
-    &[data-start="folded"] .slice-#{$i} {
+    &[data-folded="true"] .slice-#{$i} {
       @if ($i % 2) == 1 {
         @include transform(translate3d(100%, 0, 0) rotate3d(0,1,0,-180deg));
       } @else {
